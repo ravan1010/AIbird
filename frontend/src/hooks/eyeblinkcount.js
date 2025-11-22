@@ -40,7 +40,7 @@ export default function useLeftEyeControl() {
         dist(L_TOP, L_BOTTOM) /
         dist(L_LEFT, L_RIGHT);
 
-      const BLINK_TH = 0.21;
+      const BLINK_TH = 0.25;
 
       console.log("LEFT_EAR:", ear);
       setIsLeftEyeClosed(ear <= BLINK_TH);
