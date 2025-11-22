@@ -3,9 +3,9 @@ import { FaceMesh } from "@mediapipe/face_mesh";
 import { Camera } from "@mediapipe/camera_utils";
 
 // =============== LEFT EYE DETECTION HOOK ===============
-export default function useLeftEyeControl() {
+export default function useRightEyeControl() {
   const videoRef = useRef(null);
-  const [isLeftEyeClosed, setIsLeftEyeClosed] = useState(false);
+  const [isRightEyeClosed, setIsRightEyeClosed ] = useState(false);
 
   useEffect(() => {
     if (!videoRef.current) return;
@@ -20,7 +20,7 @@ export default function useLeftEyeControl() {
       refineLandmarks: true,
       minDetectionConfidence: 0.5,
       minTrackingConfidence: 0.5,
-    });
+    }
 
     faceMesh.onResults((results) => {
       if (!results.multiFaceLandmarks?.length) return;
@@ -43,7 +43,7 @@ export default function useLeftEyeControl() {
       const BLINK_TH = 0.25;
 
       console.log("LEFT_EAR:", ear);
-      setIsLeftEyeClosed(ear <= BLINK_TH);
+      setIsRightEyeClosed(ear <= BLINK_TH);
     });
 
     const camera = new Camera(videoRef.current, {
@@ -61,5 +61,5 @@ export default function useLeftEyeControl() {
     };
   }, []);
 
-  return { videoRef, isLeftEyeClosed };
+  return { videoRef, isRightEyeClosed };
 }
