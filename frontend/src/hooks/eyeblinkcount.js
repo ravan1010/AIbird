@@ -2,16 +2,16 @@ import React, { useEffect, useRef, useState } from "react";
 import { FaceMesh } from "@mediapipe/face_mesh";
 import { Camera } from "@mediapipe/camera_utils";
 
-// =============== EYE DETECTION HOOK ===============
-export default function useRightEyeControl() {
+// =============== LEFT EYE DETECTION HOOK ===============
+export default function useLeftEyeControl() {
   const videoRef = useRef(null);
-  const [isRightEyeClosed, setIsRightEyeClosed] = useState(false);
+  const [isLeftEyeClosed, setIsLeftEyeClosed] = useState(false);
 
   useEffect(() => {
     if (!videoRef.current) return;
 
     const faceMesh = new FaceMesh({
-      locateFile: file =>
+      locateFile: (file) =>
         `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}`,
     });
 
@@ -22,29 +22,28 @@ export default function useRightEyeControl() {
       minTrackingConfidence: 0.5,
     });
 
-    faceMesh.onResults(results => {
+    faceMesh.onResults((results) => {
       if (!results.multiFaceLandmarks?.length) return;
 
       const lm = results.multiFaceLandmarks[0];
 
-      // Right eye landmark indices
-      const R_TOP = lm[159];
-      const R_BOTTOM = lm[145];
-      const R_LEFT = lm[133];
-      const R_RIGHT = lm[33];
+      // LEFT EYE landmark indices
+      const L_TOP = lm[386];
+      const L_BOTTOM = lm[374];
+      const L_LEFT = lm[263];
+      const L_RIGHT = lm[362];
 
       const dist = (a, b) =>
         Math.hypot(a.x - b.x, a.y - b.y);
 
       const ear =
-        dist(R_TOP, R_BOTTOM) /
-        dist(R_LEFT, R_RIGHT);
+        dist(L_TOP, L_BOTTOM) /
+        dist(L_LEFT, L_RIGHT);
 
-      const BLINK_TH = 0.26;
+      const BLINK_TH = 0.21;
 
-      console.log('BLINK_TH:', BLINK_TH, 'EAR:', ear);
-
-      setIsRightEyeClosed(ear <= BLINK_TH);
+      console.log("LEFT_EAR:", ear);
+      setIsLeftEyeClosed(ear <= BLINK_TH);
     });
 
     const camera = new Camera(videoRef.current, {
@@ -62,6 +61,5 @@ export default function useRightEyeControl() {
     };
   }, []);
 
-  return { videoRef, isRightEyeClosed };
+  return { videoRef, isLeftEyeClosed };
 }
-
