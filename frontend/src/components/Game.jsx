@@ -26,7 +26,7 @@ export default function EyeBlinkFlappyBird() {
   const pipeGap = gameHeight * 0.28;
   const PIPE_SPEED = gameWidth * 0.004;
   const GRAVITY = 0.2;
-  const JUMP_FORCE = -4;
+  const JUMP_FORCE = -2.5;
 
   // Game state
   const [birdY, setBirdY] = useState(200);
