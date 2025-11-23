@@ -7,8 +7,8 @@ export default function Header() {
   return (
     <header className="header">
       <h1 className="title">Flapping Fly Bird</h1>
-      <p className="subtitle">Cute cartoon tap-to-fly arcade</p>
-      <p className="subtitle">Right Eye Blinks Detected: {rightBlinkCount}</p>
+      <p className="subtitle">Cute cartoon blink-to-fly arcade</p>
+      <p className="subtitle">Eye Blinks Detected: {rightBlinkCount}</p>
     </header>
   );
 }
