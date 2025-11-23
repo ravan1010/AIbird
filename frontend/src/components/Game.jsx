@@ -25,8 +25,8 @@ export default function EyeBlinkFlappyBird() {
   const pipeWidth = gameWidth * 0.15;
   const pipeGap = gameHeight * 0.28;
   const PIPE_SPEED = gameWidth * 0.004;
-  const GRAVITY = gameHeight * 0.0015;
-  const JUMP_FORCE = -4.5;
+  const GRAVITY = 0.2;
+  const JUMP_FORCE = -4;
 
   // Game state
   const [birdY, setBirdY] = useState(200);
@@ -365,7 +365,14 @@ export default function EyeBlinkFlappyBird() {
   return (
     <div style={{ textAlign: "center" }}>
       <h2>Blink Controlled Flappy Bird</h2>
-      <video ref={videoRef} style={{ display: "none" }} />
+      <p>{highScore}</p>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <video ref={videoRef} 
+             style={{ 
+              width: '50%' , 
+              height: '120px', 
+              border: "2px solid black", 
+              borderRadius: "10px" }} />
 
     <button
     onClick={resetGame}
@@ -384,6 +391,7 @@ export default function EyeBlinkFlappyBird() {
   >
     Restart
   </button>
+  </div>
 
       <canvas
         ref={canvasRef}
