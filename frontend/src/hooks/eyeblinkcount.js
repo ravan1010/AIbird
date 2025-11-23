@@ -40,7 +40,7 @@ export default function useRightEyeControl() {
         dist(R_TOP, R_BOTTOM) /
         dist(R_LEFT, R_RIGHT);
 
-      const BLINK_TH = 0.30;
+      const BLINK_TH = 0.21;
 
       console.log('BLINK_TH:', BLINK_TH, 'EAR:', ear);
 
