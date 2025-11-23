@@ -28,10 +28,10 @@ export default function useRightEyeControl() {
       const lm = results.multiFaceLandmarks[0];
 
       // Right eye landmark indices
-      const R_TOP = lm[159];
-      const R_BOTTOM = lm[145];
-      const R_LEFT = lm[133];
-      const R_RIGHT = lm[33];
+      const R_TOP = lm[386];
+      const R_BOTTOM = lm[374];
+      const R_LEFT = lm[263];
+      const R_RIGHT = lm[362];
 
       const dist = (a, b) =>
         Math.hypot(a.x - b.x, a.y - b.y);
@@ -40,9 +40,8 @@ export default function useRightEyeControl() {
         dist(R_TOP, R_BOTTOM) /
         dist(R_LEFT, R_RIGHT);
 
-      const BLINK_TH = 0.26;
-
-      console.log('BLINK_TH:', BLINK_TH, 'EAR:', ear);
+      const BLINK_TH = 0.18;
+      console.log("BLINK_TH:", BLINK_TH, "EAR:", ear);
 
       setIsRightEyeClosed(ear <= BLINK_TH);
     });
@@ -64,4 +63,3 @@ export default function useRightEyeControl() {
 
   return { videoRef, isRightEyeClosed };
 }
-
