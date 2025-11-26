@@ -41,7 +41,7 @@ export default function useRightEyeControl() {
         dist(R_LEFT, R_RIGHT);
 
       const BLINK_TH = 0.18;
-      // console.log("BLINK_TH:", BLINK_TH, "EAR:", ear);
+      console.log("BLINK_TH:", BLINK_TH, "EAR:", ear);
 
       setIsRightEyeClosed(ear <= BLINK_TH);
     });
