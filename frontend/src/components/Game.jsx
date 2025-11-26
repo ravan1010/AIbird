@@ -227,34 +227,6 @@ export default function EyeBlinkFlappyBird() {
         }
       });
 
-      // GAME OVER screen
-      if (gameOver) {
-        ctx.textAlign = "center";
-
-        ctx.font = `${gameHeight * 0.12}px Arial`;
-        ctx.strokeStyle = "black";
-        ctx.lineWidth = 8;
-        ctx.strokeText("GAME OVER", gameWidth / 2, gameHeight * 0.35);
-        ctx.fillStyle = "white";
-        ctx.fillText("GAME OVER", gameWidth / 2, gameHeight * 0.35);
-
-        ctx.font = `${gameHeight * 0.065}px Arial`;
-        ctx.strokeText(
-          "BLINK TO RESTART",
-          gameWidth / 2,
-          gameHeight * 0.7
-        );
-        ctx.fillText(
-          "BLINK TO RESTART",
-          gameWidth / 2,
-          gameHeight * 0.7
-        );
-
-        // Blink to restart
-        if (isRightEyeClosed) resetGame();
-      }
-
-
       // -------- PIPE DRAWING (Pepi Styled) --------
         pipes.forEach(pipe => {
 
@@ -351,6 +323,57 @@ export default function EyeBlinkFlappyBird() {
     gameOver,
   ]);
 
+
+  useEffect(() => {
+  if (!canvasRef.current) return;
+
+  const canvas = canvasRef.current;
+  const ctx = canvas.getContext("2d");
+
+  // --- GAME OVER SCREEN ---
+  if (gameOver === true && running === false) {
+
+    console.log("Game Over Screen Triggered");
+
+    ctx.save();
+    ctx.textAlign = "center";
+
+    // Dim overlay
+    ctx.fillStyle = "rgba(19, 1, 1, 0.55)";
+    ctx.fillRect(0, 0, gameWidth - '5px', gameHeight);
+
+    // Card box
+    const boxW = gameWidth * 0.7;
+    const boxH = gameHeight * 0.35;
+    const boxX = (gameWidth - boxW) / 2;
+    const boxY = (gameHeight - boxH) / 2;
+
+    ctx.fillStyle = "rgba(26, 25, 25, 0.15)";
+    ctx.strokeStyle = "rgba(19, 17, 17, 0.6)";
+    ctx.lineWidth = 6;
+    ctx.beginPath();
+    ctx.roundRect(boxX, boxY, boxW, boxH, 25);
+    ctx.fill();
+    ctx.stroke();
+
+    // GAME OVER text
+    ctx.font = `${gameHeight * 0.10}px Arial`;
+    ctx.fillStyle = "white";
+    ctx.fillText("GAME OVER", gameWidth / 2, boxY + boxH * 0.33);
+
+    // Score
+    ctx.font = `${gameHeight * 0.055}px Arial`;
+    ctx.fillStyle = "#ffeb3b";
+    ctx.fillText(`Score: ${score}`, gameWidth / 2, boxY + boxH * 0.55);
+
+    ctx.restore();  
+
+    return; // stop game loop logic
+  }
+}, [gameOver, running, score, gameWidth, gameHeight]);
+
+
+
   // Reset game
   const resetGame = () => {
     setBirdY(gameHeight * 0.4);
@@ -373,7 +396,8 @@ export default function EyeBlinkFlappyBird() {
               height: '120px', 
               border: "2px solid black", 
               borderRadius: "10px" }} />
-
+{
+  gameOver === true && running === false ?
     <button
     onClick={resetGame}
     style={{
@@ -391,7 +415,11 @@ export default function EyeBlinkFlappyBird() {
   >
     Restart
   </button>
+  : <>
+  </>
+}
   </div>
+  
 
       <canvas
         ref={canvasRef}
