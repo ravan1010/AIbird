@@ -13,3 +13,12 @@ body,html,#root{height:100%;margin:0;font-family:Inter, system-ui, sans-serif}
 .leaderboard{margin-left:16px;background:#fff;padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
 .leaderboard h3{margin:0 0 8px 0}
 .leaderboard ol{margin:0;padding-left:18px}
+canvas {
+  z-index: 0 !important;
+  pointer-events: none;
+  position: relative;
+}
+footer {
+  z-index: 10;
+  position: relative;
+}

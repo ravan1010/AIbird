@@ -385,7 +385,12 @@ export default function EyeBlinkFlappyBird() {
     setGameOver(false);
   };
 
+
+
+
   return (
+   
+
     <div style={{ textAlign: "center" }}>
       <h2>Blink Controlled Flappy Bird</h2>
       <p>{highScore}</p>
@@ -421,17 +426,22 @@ export default function EyeBlinkFlappyBird() {
   </div>
   
 
-      <canvas
-        ref={canvasRef}
-        width={gameWidth}
-        height={gameHeight}
-        style={{
-          border: "2px solid black",
-          background: "#90caf9",
-          marginTop: 10,
-          maxWidth: "100%",
-        }}
-      />
+      <div style={{ position: "relative" }}>
+  <canvas
+    ref={canvasRef}
+    width={gameWidth}
+    height={gameHeight}
+    style={{
+      display: "block",
+      border: "2px solid black",
+      background: "#90caf9",
+      marginTop: 10,
+      maxWidth: "100%",
+      pointerEvents: "none",
+      zIndex: -1,
+    }}
+  />
+</div>  
     </div>
   );
 }
