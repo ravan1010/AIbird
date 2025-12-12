@@ -6,9 +6,15 @@ export default function Header() {
 
   return (
     <header className="header">
-      <h1 className="title">Flapping Fly Bird</h1>
-      <p className="subtitle">Cute cartoon blink-to-fly arcade</p>
-      <p className="subtitle">Eye Blinks Detected: {rightBlinkCount}</p>
+        <div style={{ padding: "15px", textAlign: "center" }}>
+          <h1>Blink to Fly – Play Free Online Game</h1>
+          <p>Tap / Click to jump and avoid obstacles. A fun reaction-based skill game.</p>
+        </div>
+        <div style={{ padding: "15px", textAlign: "center" }}>
+          <h2>How to Play</h2>
+          <p>Blink to Fly is a fast skill game. Tap to rise, avoid blocks, and survive as long as possible.</p>
+        </div>
+        <h1>blink count : {rightBlinkCount}</h1>
     </header>
   );
 }

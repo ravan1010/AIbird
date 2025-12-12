@@ -324,53 +324,53 @@ export default function EyeBlinkFlappyBird() {
   ]);
 
 
-  useEffect(() => {
-  if (!canvasRef.current) return;
+  // useEffect(() => {
+  // if (!canvasRef.current) return;
 
-  const canvas = canvasRef.current;
-  const ctx = canvas.getContext("2d");
+  // const canvas = canvasRef.current;
+  // const ctx = canvas.getContext("2d");
 
   // --- GAME OVER SCREEN ---
-  if (gameOver === true && running === false) {
+//   if (gameOver === true && running === false) {
 
-    console.log("Game Over Screen Triggered");
+//     console.log("Game Over Screen Triggered");
 
-    ctx.save();
-    ctx.textAlign = "center";
+//     ctx.save();
+//     ctx.textAlign = "center";
 
-    // Dim overlay
-    ctx.fillStyle = "rgba(19, 1, 1, 0.55)";
-    ctx.fillRect(0, 0, gameWidth - '5px', gameHeight);
+//     // Dim overlay
+//     ctx.fillStyle = "rgba(19, 1, 1, 0.55)";
+//     ctx.fillRect(0, 0, gameWidth - '5px', gameHeight);
 
-    // Card box
-    const boxW = gameWidth * 0.7;
-    const boxH = gameHeight * 0.35;
-    const boxX = (gameWidth - boxW) / 2;
-    const boxY = (gameHeight - boxH) / 2;
+//     // Card box
+//     const boxW = gameWidth * 0.7;
+//     const boxH = gameHeight * 0.35;
+//     const boxX = (gameWidth - boxW) / 2;
+//     const boxY = (gameHeight - boxH) / 2;
 
-    ctx.fillStyle = "rgba(26, 25, 25, 0.15)";
-    ctx.strokeStyle = "rgba(19, 17, 17, 0.6)";
-    ctx.lineWidth = 6;
-    ctx.beginPath();
-    ctx.roundRect(boxX, boxY, boxW, boxH, 25);
-    ctx.fill();
-    ctx.stroke();
+//     ctx.fillStyle = "rgba(26, 25, 25, 0.15)";
+//     ctx.strokeStyle = "rgba(19, 17, 17, 0.6)";
+//     ctx.lineWidth = 6;
+//     ctx.beginPath();
+//     ctx.roundRect(boxX, boxY, boxW, boxH, 25);
+//     ctx.fill();
+//     ctx.stroke();
 
-    // GAME OVER text
-    ctx.font = `${gameHeight * 0.10}px Arial`;
-    ctx.fillStyle = "white";
-    ctx.fillText("GAME OVER", gameWidth / 2, boxY + boxH * 0.33);
+//     // GAME OVER text
+//     ctx.font = `${gameHeight * 0.10}px Arial`;
+//     ctx.fillStyle = "white";
+//     ctx.fillText("GAME OVER", gameWidth / 2, boxY + boxH * 0.33);
 
-    // Score
-    ctx.font = `${gameHeight * 0.055}px Arial`;
-    ctx.fillStyle = "#ffeb3b";
-    ctx.fillText(`Score: ${score}`, gameWidth / 2, boxY + boxH * 0.55);
+//     // Score
+//     ctx.font = `${gameHeight * 0.055}px Arial`;
+//     ctx.fillStyle = "#ffeb3b";
+//     ctx.fillText(`Score: ${score}`, gameWidth / 2, boxY + boxH * 0.55);
 
-    ctx.restore();  
+//     ctx.restore();  
 
-    return; // stop game loop logic
-  }
-}, [gameOver, running, score, gameWidth, gameHeight]);
+//     return; // stop game loop logic
+//   }
+// }, [gameOver, running, score, gameWidth, gameHeight]);
 
 
 
@@ -403,23 +403,32 @@ export default function EyeBlinkFlappyBird() {
               borderRadius: "10px" }} />
 {
   gameOver === true && running === false ?
-    <button
-    onClick={resetGame}
-    style={{
-      padding: "12px 30px",
-      fontSize: "22px",
-      color: "white",
-      background: "black",
-      border: "2px solid #00e5ff",
-      borderRadius: "10px",
-      textShadow: "0 0 10px #00e5ff",
-      boxShadow: "0 0 15px #00e5ff",
-      cursor: "pointer",
-      marginTop: "20px",
-    }}
-  >
-    Restart
-  </button>
+  //   <button
+  //   onClick={resetGame}
+  //   style={{
+  //     padding: "12px 30px",
+  //     fontSize: "22px",
+  //     color: "white",
+  //     background: "black",
+  //     border: "2px solid #00e5ff",
+  //     borderRadius: "10px",
+  //     textShadow: "0 0 10px #00e5ff",
+  //     boxShadow: "0 0 15px #00e5ff",
+  //     cursor: "pointer",
+  //     marginTop: "20px",
+  //   }}
+  // >
+  //   Restart
+  // </button>
+  <div style={{ padding: "10px", textAlign: "center" }}>
+  <h2>Game Over</h2>
+  <p>Your Score: {score}</p>
+  <p>
+    <button style={{ backgroundColor: 'blue', color: 'white', padding: '10px 20px', borderRadius: '5px', fontSize: '16px', cursor: 'pointer' }}
+    onClick={resetGame} >Try again </button>
+   to beat your high score!</p>
+</div>
+
   : <>
   </>
 }
