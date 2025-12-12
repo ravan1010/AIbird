@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
+import AdBanner from './components/Banner';
 
 
 export default function App() {
@@ -14,21 +15,11 @@ export default function App() {
         <Route path="/" element={
           <div className="app">
             <Header />
-            <div style={{ textAlign: "center", margin: "20px 0" }}>
-            <ins className="adsbygoogle"
-              style={{ display: "block" }}
-              data-ad-client="ca-pub-XXXX"
-              data-ad-slot="YYYY"
-              data-ad-format="auto"
-              data-full-width-responsive="true">
-            </ins>
-          </div>
-
-          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
+            <AdBanner />
             <main className="main">
               <Game />
             </main>
+            <AdBanner />
             <Footer />
           </div>
       } />

@@ -37,6 +37,7 @@ export default function EyeBlinkFlappyBird() {
   const [running, setRunning] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [highScore, setHighScore] = useState(0);
+  import AdBanner from "./Banner";
 
   // First pipe init
   useEffect(() => {
@@ -324,56 +325,6 @@ export default function EyeBlinkFlappyBird() {
   ]);
 
 
-  // useEffect(() => {
-  // if (!canvasRef.current) return;
-
-  // const canvas = canvasRef.current;
-  // const ctx = canvas.getContext("2d");
-
-  // --- GAME OVER SCREEN ---
-//   if (gameOver === true && running === false) {
-
-//     console.log("Game Over Screen Triggered");
-
-//     ctx.save();
-//     ctx.textAlign = "center";
-
-//     // Dim overlay
-//     ctx.fillStyle = "rgba(19, 1, 1, 0.55)";
-//     ctx.fillRect(0, 0, gameWidth - '5px', gameHeight);
-
-//     // Card box
-//     const boxW = gameWidth * 0.7;
-//     const boxH = gameHeight * 0.35;
-//     const boxX = (gameWidth - boxW) / 2;
-//     const boxY = (gameHeight - boxH) / 2;
-
-//     ctx.fillStyle = "rgba(26, 25, 25, 0.15)";
-//     ctx.strokeStyle = "rgba(19, 17, 17, 0.6)";
-//     ctx.lineWidth = 6;
-//     ctx.beginPath();
-//     ctx.roundRect(boxX, boxY, boxW, boxH, 25);
-//     ctx.fill();
-//     ctx.stroke();
-
-//     // GAME OVER text
-//     ctx.font = `${gameHeight * 0.10}px Arial`;
-//     ctx.fillStyle = "white";
-//     ctx.fillText("GAME OVER", gameWidth / 2, boxY + boxH * 0.33);
-
-//     // Score
-//     ctx.font = `${gameHeight * 0.055}px Arial`;
-//     ctx.fillStyle = "#ffeb3b";
-//     ctx.fillText(`Score: ${score}`, gameWidth / 2, boxY + boxH * 0.55);
-
-//     ctx.restore();  
-
-//     return; // stop game loop logic
-//   }
-// }, [gameOver, running, score, gameWidth, gameHeight]);
-
-
-
   // Reset game
   const resetGame = () => {
     setBirdY(gameHeight * 0.4);
@@ -427,6 +378,7 @@ export default function EyeBlinkFlappyBird() {
     <button style={{ backgroundColor: 'blue', color: 'white', padding: '10px 20px', borderRadius: '5px', fontSize: '16px', cursor: 'pointer' }}
     onClick={resetGame} >Try again </button>
    to beat your high score!</p>
+   <AdBanner />
 </div>
 
   : <>
