@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import useRightEyeControl from "../hooks/eyeblinkcount";
+import AdBanner from "./Banner";
+
 
 export default function EyeBlinkFlappyBird() {
   const { videoRef, isRightEyeClosed } = useRightEyeControl();
@@ -37,7 +39,6 @@ export default function EyeBlinkFlappyBird() {
   const [running, setRunning] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [highScore, setHighScore] = useState(0);
-  import AdBanner from "./Banner";
 
   // First pipe init
   useEffect(() => {
