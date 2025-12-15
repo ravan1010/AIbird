@@ -15,7 +15,6 @@ export default function App() {
         <Route path="/" element={
           <div className="app">
             <Header />
-            <AdBanner />
             <main className="main">
               <Game />
             </main>
