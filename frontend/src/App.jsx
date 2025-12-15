@@ -18,7 +18,6 @@ export default function App() {
             <main className="main">
               <Game />
             </main>
-            <AdBanner />
             <Footer />
           </div>
       } />
