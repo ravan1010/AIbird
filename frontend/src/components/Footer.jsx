@@ -11,7 +11,7 @@ export default function Footer() {
     Blink to Fly is a fast reaction skill game. Tap or blink to rise, avoid the
     obstacles, and survive as long as possible.
   </p>
-  <AdBanner />
+  {/* <AdBanner /> */}
   <p>
     If you're playing on a laptop, blink your <strong>left eye</strong> to jump.<br />
     If you're playing on a mobile, blink your <strong>right eye</strong> to jump.

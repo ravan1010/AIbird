@@ -379,7 +379,7 @@ export default function EyeBlinkFlappyBird() {
     <button style={{ backgroundColor: 'blue', color: 'white', padding: '10px 20px', borderRadius: '5px', fontSize: '16px', cursor: 'pointer' }}
     onClick={resetGame} >Try again </button>
    to beat your high score!</p>
-   <AdBanner />
+   {/* <AdBanner /> */}
 </div>
 
   : <>

@@ -11,7 +11,7 @@ export default function Header() {
           <h1>Blink to Fly – Play Free Online Game</h1>
           <p>Tap / Click to jump and avoid obstacles. A fun reaction-based skill game.</p>
         </div>
-        <AdBanner />
+        {/* <AdBanner /> */}
         <div style={{ padding: "15px", textAlign: "center" }}>
           <h2>How to Play</h2>
           <p>Blink to Fly is a fast skill game. Tap to rise, avoid blocks, and survive as long as possible.</p>
