@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import useRightEyeControl from "../hooks/eyeblinkcount";
+import useHandControl from "../hooks/eyeblinkcount";
 import AdBanner from "./Banner";
 
 
 export default function EyeBlinkFlappyBird() {
-  const { videoRef, isRightEyeClosed } = useRightEyeControl();
+  const { videoRef, isHandClosed } = useHandControl();
   const canvasRef = useRef(null);
 
   // Responsive game size
@@ -51,11 +51,11 @@ export default function EyeBlinkFlappyBird() {
 
   // 🔥 Blink to START
   useEffect(() => {
-    if (!started && isRightEyeClosed) {
+    if (!started && isHandClosed) {
       setStarted(true);
       setRunning(true);
     }
-  }, [isRightEyeClosed, started]);
+  }, [isHandClosed, started]);
 
   // Game Loop
   useEffect(() => {
@@ -134,7 +134,7 @@ export default function EyeBlinkFlappyBird() {
       }
 
       // Bird physics
-      if (isRightEyeClosed) setVelocity(JUMP_FORCE);
+      if (isHandClosed) setVelocity(JUMP_FORCE);
       else setVelocity((v) => v + GRAVITY);
 
       setBirdY((y) => y + velocity);
@@ -314,7 +314,7 @@ export default function EyeBlinkFlappyBird() {
     animation = requestAnimationFrame(gameLoop);
     return () => cancelAnimationFrame(animation);
   }, [
-    isRightEyeClosed,
+    isHandClosed,
     velocity,
     birdY,
     pipes,
@@ -344,7 +344,7 @@ export default function EyeBlinkFlappyBird() {
    
 
     <div style={{ textAlign: "center" }}>
-      <h2>Blink Controlled Flappy Bird</h2>
+      <h2>hand Controlled Flappy Bird</h2>
       <p>{highScore}</p>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
       <video ref={videoRef} 

@@ -1,54 +1,62 @@
-import React, { useEffect, useRef, useState } from "react";
-import { FaceMesh } from "@mediapipe/face_mesh";
+import { useEffect, useRef, useState } from "react";
+import { Hands } from "@mediapipe/hands";
 import { Camera } from "@mediapipe/camera_utils";
 
-// =============== EYE DETECTION HOOK ===============
-export default function useRightEyeControl() {
+export default function useHandControl() {
   const videoRef = useRef(null);
-  const [isRightEyeClosed, setIsRightEyeClosed] = useState(false);
+  const [isHandClosed, setIsHandClosed] = useState(false); 
 
   useEffect(() => {
     if (!videoRef.current) return;
 
-    const faceMesh = new FaceMesh({
+    const hands = new Hands({
       locateFile: file =>
-        `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}`,
+        `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,
     });
 
-    faceMesh.setOptions({
-      maxNumFaces: 1,
-      refineLandmarks: true,
-      minDetectionConfidence: 0.5,
-      minTrackingConfidence: 0.5,
+    hands.setOptions({
+      maxNumHands: 1,
+      modelComplexity: 1,
+      minDetectionConfidence: 0.7,
+      minTrackingConfidence: 0.7,
     });
 
-    faceMesh.onResults(results => {
-      if (!results.multiFaceLandmarks?.length) return;
+    hands.onResults(results => {
+      if (!results.multiHandLandmarks?.length) return;
 
-      const lm = results.multiFaceLandmarks[0];
+      const lm = results.multiHandLandmarks[0];
 
-      // Right eye landmark indices
-      const R_TOP = lm[386];
-      const R_BOTTOM = lm[374];
-      const R_LEFT = lm[263];
-      const R_RIGHT = lm[362];
+      // Finger tip & pip indices
+      const tips = [8, 12, 16, 20]; // index, middle, ring, pinky tips
+      const pips = [6, 10, 14, 18]; // joints below tips
 
-      const dist = (a, b) =>
-        Math.hypot(a.x - b.x, a.y - b.y);
+      let foldedFingers = 0;
 
-      const ear =
-        dist(R_TOP, R_BOTTOM) /
-        dist(R_LEFT, R_RIGHT);
+      for (let i = 0; i < tips.length; i++) {
+        if (lm[tips[i]].y > lm[pips[i]].y) {
+          foldedFingers++; // finger folded
+        }
+      }
 
-      const BLINK_TH = 0.15;
-      console.log("BLINK_TH:", BLINK_TH, "EAR:", ear);
+      // Thumb (special case)
+      const thumbTip = lm[4];
+      const thumbIP = lm[3];
 
-      setIsRightEyeClosed(ear <= BLINK_TH);
+      if (thumbTip.x < thumbIP.x) {
+        foldedFingers++;
+      }
+
+      // If most fingers folded → hand closed
+      const isClosed = foldedFingers >= 4;
+
+      console.log("Folded:", foldedFingers, "Closed:", isClosed);
+
+      setIsHandClosed(isClosed);
     });
 
     const camera = new Camera(videoRef.current, {
       onFrame: async () => {
-        await faceMesh.send({ image: videoRef.current });
+        await hands.send({ image: videoRef.current });
       },
       width: 300,
       height: 200,
@@ -61,5 +69,5 @@ export default function useRightEyeControl() {
     };
   }, []);
 
-  return { videoRef, isRightEyeClosed };
+  return { videoRef, isHandClosed };
 }

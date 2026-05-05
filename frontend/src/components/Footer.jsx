@@ -8,14 +8,10 @@ export default function Footer() {
           <div style={{ padding: "15px", textAlign: "center" }}>
   <h2>How to Play</h2>
   <p>
-    Blink to Fly is a fast reaction skill game. Tap or blink to rise, avoid the
+    hand close to Fly is a fast reaction skill game. Tap or blink to rise, avoid the
     obstacles, and survive as long as possible.
   </p>
   {/* <AdBanner /> */}
-  <p>
-    If you're playing on a laptop, blink your <strong>left eye</strong> to jump.<br />
-    If you're playing on a mobile, blink your <strong>right eye</strong> to jump.
-  </p>
 </div>
       <div className="max-w-6xl mx-auto px-6 border-5 flex flex-col md:flex-row justify-between items-center">
 
